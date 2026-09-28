@@ -220,15 +220,36 @@ export const pillars: Pillar[] = [
     group: "Go-to-Market & Delivery",
     workstreams: [
       {
-        title: "Engagement Lifecycle",
+        title: "Kickoff: Handover & Staffing",
         activities: [
           {
             name: "Internal Kick-off (Sales → Delivery handoff)",
-            note: "Transfer deal context from Sales to Delivery before an SA is staffed",
+            note: "Transfer deal context (signed SOW, scope, client context & commercials) from Sales to Delivery before an SA is staffed",
             cadence: "per-project",
             deadline: "Before an SA is staffed",
-            raci: { r: "Sales Rep", a: "Head of Pre-Sales", c: "Head of Delivery", i: "Delivery Manager" },
+            raci: {
+              r: "Sales Rep",
+              a: "Head of Pre-Sales",
+              c: "Head of Delivery",
+              i: "Delivery Manager, Client Stakeholders",
+            },
           },
+          {
+            name: "Resource allocation & staffing assignment",
+            note: "HR identifies and assigns available resources to the incoming project",
+            cadence: "per-project",
+            raci: {
+              r: "HR Executive",
+              a: "Head of Delivery",
+              c: "Resourcing Manager, Head of HR",
+              i: "Delivery Manager",
+            },
+          },
+        ],
+      },
+      {
+        title: "Engagement Lifecycle",
+        activities: [
           {
             name: "Claude Project Setup",
             note: "Set up the Google Drive and Claude Project the whole engagement will run on",
@@ -335,17 +356,6 @@ export const pillars: Pillar[] = [
       {
         title: "Resource & Staffing",
         activities: [
-          {
-            name: "Resource allocation & staffing assignment",
-            note: "HR identifies and assigns available resources to the incoming project",
-            cadence: "per-project",
-            raci: {
-              r: "HR Executive",
-              a: "Head of Delivery",
-              c: "Resourcing Manager, Head of HR",
-              i: "Delivery Manager",
-            },
-          },
           {
             name: "Timesheet & utilization review",
             note: "Track billable vs. bench hours across delivery teams",
