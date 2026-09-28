@@ -80,6 +80,9 @@ export default function Sidebar() {
               <span className="h-2 w-2 rounded-full bg-cad-quarterly" /> Quarterly
             </div>
             <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-cad-half-yearly" /> Half-Yearly
+            </div>
+            <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-cad-annual" /> Annual
             </div>
           </div>

@@ -1,4 +1,4 @@
-export type Cadence = "per-project" | "as-needed" | "daily" | "weekly" | "monthly" | "quarterly" | "annual";
+export type Cadence = "per-project" | "as-needed" | "daily" | "weekly" | "monthly" | "quarterly" | "half-yearly" | "annual";
 
 export type Raci = {
   r?: string;
@@ -57,6 +57,7 @@ export const cadenceLabel: Record<Cadence, string> = {
   weekly: "Weekly",
   monthly: "Monthly",
   quarterly: "Quarterly",
+  "half-yearly": "Half-Yearly",
   annual: "Annual",
 };
 
@@ -416,15 +417,24 @@ export const pillars: Pillar[] = [
         title: "Attendance & Leave",
         activities: [
           {
-            name: "Attendance & leave approvals",
-            note: "Process leave requests & flag attendance exceptions",
-            cadence: "daily",
+            name: "Attendance Tracking",
+            note: "Check attendance and exceptions every week; close the month's attendance for payroll",
+            cadence: "weekly",
+            deadline: "Weekly check; month-end close before payroll",
+            raci: { r: "HR Executive", a: "Head of HR", c: "Delivery Managers", i: "Finance" },
+          },
+          {
+            name: "Leave Approval",
+            note: "Review and approve or decline leave requests, and keep leave balances up to date",
+            cadence: "as-needed",
+            deadline: "As requests come in",
             raci: { r: "HR Executive", a: "Head of HR", c: "Delivery Managers" },
           },
           {
-            name: "Grievance & employee relations review",
-            note: "Review and act on open employee concerns",
+            name: "Employee Grievance",
+            note: "Log and resolve employee concerns as they're raised; review open cases every week",
             cadence: "weekly",
+            deadline: "Handled as raised; reviewed weekly",
             raci: { r: "HR Executive", a: "Head of HR", c: "Leadership" },
           },
         ],
@@ -433,9 +443,24 @@ export const pillars: Pillar[] = [
         title: "Onboarding & Exits",
         activities: [
           {
-            name: "Onboarding / exit formalities",
-            note: "Process joiner & leaver paperwork as they occur",
-            cadence: "daily",
+            name: "Employee Recruitment (HR coordination)",
+            note: "Raise hiring requests, coordinate with the Recruitment team and track open positions until they're filled",
+            cadence: "as-needed",
+            deadline: "When a new position is approved",
+            raci: { r: "HR Executive", a: "Head of HR", c: "Recruitment, Delivery Managers", i: "Finance" },
+          },
+          {
+            name: "Offer Letters",
+            note: "Prepare and issue offer letters using the salary breakup from Finance, and track acceptance",
+            cadence: "as-needed",
+            deadline: "After the offer is approved",
+            raci: { r: "HR Executive", a: "Head of HR", c: "Finance, Recruitment", i: "Delivery Managers" },
+          },
+          {
+            name: "Employee Onboarding",
+            note: "Joining formalities: documents, system access, ID, and health insurance enrolment",
+            cadence: "as-needed",
+            deadline: "On or before the joining date",
             raci: { r: "HR Executive", a: "Head of HR", c: "IT, Finance", i: "Delivery Managers" },
           },
           {
@@ -444,15 +469,23 @@ export const pillars: Pillar[] = [
             cadence: "weekly",
             raci: { r: "HR Executive", a: "Head of HR", c: "Delivery" },
           },
+          {
+            name: "Employee Offboarding",
+            note: "Resignation, notice period, handover, asset return, access removal, full & final settlement and relieving letter",
+            cadence: "as-needed",
+            deadline: "By the last working day",
+            raci: { r: "HR Executive", a: "Head of HR", c: "IT, Finance", i: "Delivery Managers" },
+          },
         ],
       },
       {
         title: "Payroll & Compliance",
         activities: [
           {
-            name: "Payroll input prep",
-            note: "Compile attendance, leave & variable pay inputs",
+            name: "Payroll Processing (HR inputs)",
+            note: "Compile attendance, leave and variable pay inputs and send them to Finance for salary processing",
             cadence: "monthly",
+            deadline: "30th or 31st of every month",
             raci: { r: "HR Executive", a: "Head of HR", c: "Finance" },
           },
           {
@@ -467,16 +500,32 @@ export const pillars: Pillar[] = [
         title: "Performance & Development",
         activities: [
           {
-            name: "Performance review cycle",
-            note: "Goal-setting & review across all delivery teams",
-            cadence: "quarterly",
-            raci: { r: "Head of HR", a: "Leadership", c: "Delivery Managers" },
+            name: "Performance Review",
+            note: "Half-yearly goal-setting and performance review across all delivery teams",
+            cadence: "half-yearly",
+            deadline: "June and December",
+            raci: { r: "Head of HR", a: "Leadership", c: "Delivery Managers", i: "All Employees" },
           },
           {
-            name: "Appraisal & increment cycle",
-            note: "Annual compensation review & promotion cycle",
-            cadence: "annual",
+            name: "Appraisals",
+            note: "Compensation review, increments and promotions based on the performance review",
+            cadence: "half-yearly",
+            deadline: "July and January",
             raci: { r: "Head of HR", a: "Leadership", c: "Finance", i: "All Employees" },
+          },
+          {
+            name: "Training & Certifications",
+            note: "Plan and track employee trainings and certifications (e.g. Salesforce certifications)",
+            cadence: "as-needed",
+            deadline: "As planned",
+            raci: { r: "HR Executive", a: "Head of HR", c: "Delivery Managers", i: "Finance" },
+          },
+          {
+            name: "Events Planning",
+            note: "Plan and run employee events and celebrations",
+            cadence: "as-needed",
+            deadline: "As planned",
+            raci: { r: "HR Executive", a: "Head of HR", c: "Leadership, Marketing", i: "All Employees" },
           },
         ],
       },
@@ -915,6 +964,7 @@ export function cadenceMix(pillar: Pillar): Record<Cadence, number> {
     weekly: 0,
     monthly: 0,
     quarterly: 0,
+    "half-yearly": 0,
     annual: 0,
   };
   for (const ws of pillar.workstreams) {

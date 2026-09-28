@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Pillar, cadenceMix, activityCount } from "@/app/data";
 
-const cadenceOrder = ["per-project", "as-needed", "daily", "weekly", "monthly", "quarterly", "annual"] as const;
+const cadenceOrder = ["per-project", "as-needed", "daily", "weekly", "monthly", "quarterly", "half-yearly", "annual"] as const;
 const cadenceColor: Record<(typeof cadenceOrder)[number], string> = {
   "per-project": "bg-cad-per-project",
   "as-needed": "bg-cad-as-needed",
@@ -9,6 +9,7 @@ const cadenceColor: Record<(typeof cadenceOrder)[number], string> = {
   weekly: "bg-cad-weekly",
   monthly: "bg-cad-monthly",
   quarterly: "bg-cad-quarterly",
+  "half-yearly": "bg-cad-half-yearly",
   annual: "bg-cad-annual",
 };
 
